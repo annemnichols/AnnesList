@@ -1,28 +1,7 @@
-== README
+Anne's List
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This web application is an assignment from DevPoint Labs and is a classifieds web site (similar to Craig's List. Thus the name. I'm clever.)
 
-Things you may want to cover:
+The root page displays classified ads, and user accounts are set up with the Devise gem. 
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Front-end prettiness set up using SASS and Bootstrap.
