@@ -17,11 +17,11 @@ ActiveRecord::Schema.define(version: 20150103175847) do
   enable_extension "plpgsql"
 
   create_table "posts", force: true do |t|
-    t.string   "title"
+    t.string   "title",       limit: 80
     t.text     "description"
-    t.decimal  "price"
+    t.decimal  "price",                  precision: 8, scale: 2
     t.string   "location"
-    t.boolean  "is_sold"
+    t.boolean  "is_sold",                                        default: false
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
