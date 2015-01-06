@@ -13,10 +13,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem "paperclip", "~> 4.2"
-<<<<<<< HEAD
-gem 'will_paginate', '~> 3.0.6'
-=======
->>>>>>> a1d50c7649439a859848f451e0295b255be04651
 
 group :development do
 	gem 'spring'
