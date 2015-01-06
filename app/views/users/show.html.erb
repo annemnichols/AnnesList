@@ -1,34 +1,54 @@
 <h1><%= @user.username %></h1>
-<h3><%= @user.email %></h3>
+<% if current_user == @user %>
+	<%= link_to 'Edit Profile', edit_user_registration_path(@user), class: "btn btn-success btn-default user-button" %>
+<% else %>
+	<h3>Contact: <%= mail_to @user.email %></h3>
+<% end %>
 
-<%= link_to 'Edit Profile', edit_user_registration_path(@user), class: "btn btn-success btn-lg user-button" %>
-<br>
 <div class="post-table">
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th colspan="2" class="table-header"><h3>Your Ads<h3></th>
+				<% if current_user == @user %>
+					<th colspan="2", class="table-header"><h3>Your Ads<h3></th>
+				<% else %>
+					<th colspan="2", class="table-header"><h3><%= @user.username.camelcase %>'s Ads<h3></th>
+				<% end %>
 			</tr>
 			<tr>
 				<th>Title</th>
 				<th>Price</th>
-				<th>Sold?</th>
-				<th>Edit Post</th>
-				<th>Delete Post</th>
+				<% if current_user == @user %>
+					<th>Sold?</th>
+					<th>Edit Post</th>
+					<th>Delete Post</th>
+				<% else %>
+					<th>Photo (if available)</th>
+				<% end %>
 			</tr>
 		</thead>
-		<tbody>      
+		<tbody>   
 			<% @user.posts.each do |post| %>
 				<tr>
-					<td><%= post.title %></td>
+					<td><%= link_to post.title, user_post_path(post.user, post) %></td>
 					<td><%= number_to_currency(post.price) %></td>
-					<td><%= post.is_sold %></td>
-					<td><%= link_to 'Edit', edit_user_post_path(@user, post), class: "btn btn-success btn-lg user-button" %></td>
-					<td><%= link_to 'Delete', user_post_path(@user, post), method: :delete, class: "btn btn-success btn-lg user-button" %></td>
+					<% if current_user == @user %>
+						<td><%= check_box_tag "post_ids[]", post.id, post.is_sold %></td>
+						<td><%= link_to 'Edit', edit_user_post_path(@user, post), class: "btn btn-success btn-default user-button" %></td>
+						<td><%= link_to 'Delete', user_post_path(@user, post), method: :delete, class: "btn btn-success btn-default user-button" %></td>
+					<% else %>
+						<% if post.photo.file? %>
+							<td><%= image_tag post.photo.url(:thumb) %></td>
+						<% else %>
+							<td> </td>
+						<% end %>
+					<% end %>
 				</tr>
 			<% end %>
 		</tbody>
 	</table>
 </div>
-<%= link_to 'New Post', new_user_post_path(@user), class: "btn btn-success btn-lg user-button" %>
 
+<% if current_user == @user %>
+	<%= link_to 'New Post', new_user_post_path(@user), class: "btn btn-success btn-default user-button" %>
+<% end %>

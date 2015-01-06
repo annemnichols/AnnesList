@@ -1,1 +1,8 @@
-<h1>Here is the post page.</h1>
+<h1><%= @post.title %> - <%= number_to_currency(@post.price) %></h1>
+<h3>Location: <%= @post.location %></h3>
+<% if @post.photo.file? %>
+	<%= image_tag @post.photo.url(:medium) %>
+<% end %>
+<p><%= @post.description %></p>
+<h4>Listed by: <%= link_to @post.user.username, user_path(@post.user) %></h4>
+<h4>Contact info: <%= mail_to @user.email %></h4>

@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
 	before_action :set_user, except: [:index]
-  before_action :set_post, only: [:edit, :update, :destroy]
+  before_action :set_post, only: [:edit, :update, :destroy, :show]
 
   def index
-  	@posts = Post.all
+  	@posts = Post.all.order("created_at desc")
   end
 
   def show
@@ -17,7 +17,6 @@ class PostsController < ApplicationController
   	@post = @user.posts.build(post_params)
   	if @post.save
   		redirect_to user_path(@user)
-  		flash.now["New post was created."]
   	else
   		render :new
   	end
@@ -29,7 +28,6 @@ class PostsController < ApplicationController
   def update
   	if @post.update(post_params)
   		redirect_to user_path(@user)
-  		flash.now["New post was updated."]
   	else
   		render :edit
   	end
@@ -38,7 +36,6 @@ class PostsController < ApplicationController
   def destroy
   	@post.destroy
   	redirect_to user_path(@user)
-  	flash.now["Post was deleted."]
   end
 
   private
@@ -52,6 +49,6 @@ class PostsController < ApplicationController
   	end
 
   	def post_params
-  		params.require(:post).permit(:title, :description, :price, :location, :is_sold, :created_at)
+  		params.require(:post).permit(:title, :description, :price, :location, :is_sold, :created_at, :photo)
   	end
 end

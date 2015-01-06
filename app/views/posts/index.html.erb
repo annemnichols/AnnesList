@@ -9,16 +9,22 @@
 				<th>Location</th>
 				<th>User</th>
 				<th>Date Posted</th>
+				<th>Photo (if available)</th>
 			</tr>
 		</thead>
 		<tbody>      
 			<% @posts.each do |post|%>
 				<tr>
-					<td><%= post.title %></td>
+					<td><%= link_to post.title, user_post_path(post.user, post) %></td>
 					<td><%= number_to_currency(post.price) %></td>
 					<td><%= post.location %></td>
-					<td><%= post.user.username %></td>
-					<td><%= post.created_at.strftime("%m/%d/%Y") %>
+					<td><%= link_to post.user.username, user_path(post.user) %></td>
+					<td><%= post.created_at.strftime("%m/%d/%Y") %></td>
+					<% if post.photo.file? %>
+						<td><%= image_tag post.photo.url(:thumb), class:"index-image" %>
+					<% else %>
+						<td> </td>
+					<% end %>
 				</tr>
 			<% end %>
 		</tbody>
