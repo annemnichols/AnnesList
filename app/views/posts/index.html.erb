@@ -1,0 +1,32 @@
+<h1>Classified Ads</h1>
+
+<div class="post-table">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Price</th>
+				<th>Location</th>
+				<th>User</th>
+				<th>Date Posted</th>
+				<th>Photo (if available)</th>
+			</tr>
+		</thead>
+		<tbody>      
+			<% @posts.each do |post|%>
+				<tr>
+					<td><%= link_to post.title, user_post_path(post.user, post) %></td>
+					<td><%= number_to_currency(post.price) %></td>
+					<td><%= post.location %></td>
+					<td><%= link_to post.user.username, user_path(post.user) %></td>
+					<td><%= post.created_at.strftime("%m/%d/%Y") %></td>
+					<% if post.photo.file? %>
+						<td><%= image_tag post.photo.url(:thumb), class:"index-image" %>
+					<% else %>
+						<td> </td>
+					<% end %>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
