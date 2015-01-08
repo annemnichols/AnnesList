@@ -13,9 +13,98 @@
  *= require_tree .
  *= require_self
  */
+
+$navbar-height: 100px;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+
+.navbar,
+h1,
+th {
+  font-family: "Ubuntu";
+}
+
+.navbar {
+  background-color: #403330;
+}
+
+th {
+  font-size: 1.25em;
+}
+
+.navbar-brand {
+  font-size: 3em;
+}
+
+.nav-text {
+  font-size: 1.5em;
+}
+
+.main {
+	margin-top: 50px;
+}
+
+.user-list {
+  font-size: 2em;
+}
 
 .index-image {
 	margin: 3px;
 }
+
+.table-list {
+	border: 2px solid #DDD;
+}
+
+.show-table td{
+	width: 20%;
+}
+
+.user-list li{
+	list-style: none;
+	padding-bottom: 10px;
+}
+
+.pagination {
+	margin-left: auto;
+	margin-right: auto;
+  em.current,
+  a,
+ 	span.disabled {
+    float: left;
+    padding: 0 14px;
+    line-height: 38px;
+    text-decoration: none;
+    background-color: white;
+    border: 1px solid #DDD;
+    border-left-width: 0;
+  }
+  .previous_page {
+    border-left: 1px solid #ddd;
+  }
+  span.disabled {
+    color: #aaa !important;
+    border-left-width: 1px;
+  }
+}
+
+.form-fields {
+  width: 250px;
+  margin-bottom: 10px;
+}
+
+.photo-upload-box {
+  border: 1px solid #DDD;
+  padding: 5px;
+  width: 250px;
+}
+
+.btn {
+  margin-top: 10px;
+}
+
+
+

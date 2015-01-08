@@ -1,5 +1,3 @@
-<h1>Classified Ads</h1>
-
 <div class="post-table">
 	<table class="table table-striped">
 		<thead>
@@ -12,21 +10,22 @@
 				<th>Photo (if available)</th>
 			</tr>
 		</thead>
-		<tbody>      
+		<tbody class="table-list">   
 			<% @posts.each do |post|%>
 				<tr>
-					<td><%= link_to post.title, user_post_path(post.user, post) %></td>
-					<td><%= number_to_currency(post.price) %></td>
-					<td><%= post.location %></td>
-					<td><%= link_to post.user.username, user_path(post.user) %></td>
-					<td><%= post.created_at.strftime("%m/%d/%Y") %></td>
+					<td class="col-md-3"><%= link_to post.title, user_post_path(post.user, post) %></td>
+					<td class="col-md-2"><%= number_to_currency(post.price) %></td>
+					<td class="col-md-2"><%= post.location %></td>
+					<td class="col-md-1"><%= link_to post.user.username, user_path(post.user) %></td>
+					<td class="col-md-2"><%= post.created_at.strftime("%m/%d/%Y") %></td>
 					<% if post.photo.file? %>
-						<td><%= image_tag post.photo.url(:thumb), class:"index-image" %>
+						<td class="col-md-2"><%= image_tag post.photo.url(:thumb), class:"index-image" %>
 					<% else %>
-						<td> </td>
+						<td class="col-md-2"> </td>
 					<% end %>
 				</tr>
 			<% end %>
 		</tbody>
 	</table>
+	<%= will_paginate @posts %>
 </div>
